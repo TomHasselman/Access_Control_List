@@ -1,0 +1,47 @@
+viewing as root
+Added alice as a friend
+Added bob as a friend
+Created list: students
+Added alice to the students list
+Added bob to the students list
+Added tom as a friend
+log out worked!
+viewing as alice
+Posted picture: file1.txt
+Writing comments to file1.txt: 
+	Text from Alice in file1
+Posted picture: file2.txt
+Writing comments to file2.txt: 
+	Text from Alice in file2
+Changed the permissions for file2.txt to rw rw r-
+Changed the list for file2.txt to students
+log out worked!
+viewing as tom
+Reading comments from file1.txt: 
+	Text from Alice in file1
+Reading comments from file2.txt: 
+	Text from Alice in file2
+Writing comments to file2.txt: 
+	Text from Tom in file2
+viewing as bob
+log out worked!
+viewing as bob
+Writing comments to file2.txt: 
+	Text from Bob in file2
+Reading comments from file2.txt: 
+	Text from Alice in file2
+	Text from Tom in file2
+	Text from Bob in file2
+log out worked!
+viewing as root
+Changed the owner for file1.txt to tom
+log out worked!
+viewing as tom
+Writing comments to file1.txt: 
+	Text from Tom in file1
+Reading comments from file1.txt: 
+	Text from Alice in file1
+	Text from Tom in file1
+log out worked!
+Ending program...
+Writing friends.txt, lists.txt, pictures.txt, and audit.txt...
