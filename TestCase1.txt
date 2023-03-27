@@ -1,0 +1,35 @@
+friendadd root
+viewby root
+friendadd alice
+friendadd bob
+listadd students
+friendlist alice students
+friendlist bob students
+friendadd tom
+logout
+viewby alice
+postpicture file1.txt
+writecomments file1.txt Text from Alice in file1
+postpicture file2.txt
+writecomments file2.txt Text from Alice in file2
+chmod file2.txt rw rw r-
+chlst file2.txt students
+logout
+viewby tom
+readcomments file1.txt
+readcomments file2.txt
+writecomments file2.txt Text from Tom in file2
+viewby bob
+logout
+viewby bob
+writecomments file2.txt Text from Bob in file2
+readcomments file2.txt
+logout
+viewby root
+chown file1.txt tom
+logout
+viewby tom
+writecomments file1.txt Text from Tom in file1
+readcomments file1.txt
+logout
+end
