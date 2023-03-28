@@ -2,7 +2,7 @@ import re
 import my_facebook_support
 import os
 
-friend_list = []
+friend_lists = []
 picture_list = []
 current_user = None
 
@@ -34,29 +34,32 @@ def make_user(name):
 
 def friend_add(args):
   friend_name = args[0][0]
+  friend_file = open("friends.txt")
+  global current_user
 
-  if friend_name in friend_list:
+  if check_friend_list(friend_name):
     string = "Cannot add duplicate friends"
     print(string)
     log_audit(string)
     return
 
-  friend_file = open("friends.txt")
+  
 
-  #This means this is the first run of this command, so set the currrent user to the first "friend"
+  # This means this is the first run of this command, so set the currrent user to the first "friend"
   if os.stat("friends.txt").st_size == 0:
-    global current_user
     current_user = friend_name
-    friend_list.append(friend_name)
-    log_friend_list(friend_name)
-
-  #the current user must be "root" or it must be the first run of the command
-  elif friend_file.readlines()[0].rstrip('\n') == current_user:
-    friend_list.append(friend_name)
     log_friend_list(friend_name)
     string = f"Added {friend_name} as a friend"
     print(string)
     log_audit(string)
+
+  # the current user must be "root" (the first user in the friend file)
+  elif friend_file.readlines()[0].rstrip('\n') == current_user:
+    log_friend_list(friend_name)
+    string = f"Added {friend_name} as a friend"
+    print(string)
+    log_audit(string)
+    
   else:
     string = "This user cannot add friends"
     print(string)
@@ -66,9 +69,10 @@ def friend_add(args):
 
 
 def view_by(friend_name):
+  global current_user
   if (check_friend_list(friend_name[0][0])):
-
-    string = f"viewing as {friend_name[0][0]}"
+    current_user = friend_name[0][0]
+    string = f"viewing as {current_user}"
     print(string)
     log_audit(string)
   else:
@@ -77,10 +81,12 @@ def view_by(friend_name):
     log_audit(string)
 
 
-#takes args but doesn't use them. This is a consequence of how the process_cmd() function works
+# takes args but doesn't use them. This is a consequence of how the process_cmd() function works
 def logout(args):
   """logs out the current user"""
-  string = "log out worked!"
+  global current_user
+  string = f"{current_user} logged out"
+  current_user = None
   print(string)
   log_audit(string)
 
@@ -98,13 +104,13 @@ def friend_list_add(args):
 
 
 def post_picture(args):
-  new_picture = my_facebook_support.Picture(args[0][0], current_user, None,
-                                            None)
+  new_picture = my_facebook_support.Picture(
+      args[0][0], current_user, None, None)
   picture_list.append(new_picture)
 
-  open(f"{args[0][0]}", "w").close()  #creates a new file
+  open(f"{args[0][0]}", "w").close()  # creates a new file
 
-  string = f"Posted picture: {args[0][0]}"
+  string = f"Posted picture: {args[0][0]} with {current_user} as the owner and default permissions"
   print(string)
   log_audit(string)
 
@@ -116,7 +122,8 @@ def chlst(args):
 
 
 def chmod(args):
-  string = f"Changed the permissions for {args[0][0]} to {args[0][1]}"
+  global current_user
+  string = f"Changed the permissions for {args[0][0]} to {args[0][1]} by {current_user}"
   print(string)
   log_audit(string)
 
@@ -145,6 +152,7 @@ def read_comments(args):
 
 
 def write_comments(args):
+  global current_user
   file_name = args[0][0]
   comments = args[0][1]
 
@@ -152,7 +160,7 @@ def write_comments(args):
   picture_file.write(comments + "\n")
   picture_file.close()
 
-  string = f"Writing comments to {file_name}: "
+  string = f"Writing comments to {file_name} as {current_user}: "
   print(string)
   log_audit(string)
 
@@ -162,7 +170,7 @@ def write_comments(args):
   my_facebook_support.make_white()
 
 
-#takes args but doesn't use them. This is a consequence of how the process_cmd() function works
+# takes args but doesn't use them. This is a consequence of how the process_cmd() function works
 def end(args):
   """ends the program"""
   string = "Ending program..."
@@ -174,28 +182,28 @@ def end(args):
 
 
 COMMAND_DICT = {
-  'friendadd': friend_add,
-  'viewby': view_by,
-  'logout': logout,
-  'listadd': list_add,
-  'friendlist': friend_list_add,
-  'postpicture': post_picture,
-  'chlst': chlst,
-  'chmod': chmod,
-  'chown': chown,
-  'readcomments': read_comments,
-  'writecomments': write_comments,
-  'end': end
+    'friendadd': friend_add,
+    'viewby': view_by,
+    'logout': logout,
+    'listadd': list_add,
+    'friendlist': friend_list_add,
+    'postpicture': post_picture,
+    'chlst': chlst,
+    'chmod': chmod,
+    'chown': chown,
+    'readcomments': read_comments,
+    'writecomments': write_comments,
+    'end': end
 }
 
 
 def parse_command(command_string):
   reg_ex = re.search(
-    "^([^\s]+)[ ]?([^\s]+)?[ ]?(.+)?", command_string
-  )  #matches the entire command string, splitting it into 3 groups
-  cmd = reg_ex.group(1)  #pulls the command portion of the string
-  arg1 = reg_ex.group(2)  #pulls the first argument
-  arg2 = reg_ex.group(3)  #pulls the second argument
+      "^([^\s]+)[ ]?([^\s]+)?[ ]?(.+)?", command_string
+  )  # matches the entire command string, splitting it into 3 groups
+  cmd = reg_ex.group(1)  # pulls the command portion of the string
+  arg1 = reg_ex.group(2)  # pulls the first argument
+  arg2 = reg_ex.group(3)  # pulls the second argument
 
   args = (arg1, arg2)
   process_cmd(cmd, args)
