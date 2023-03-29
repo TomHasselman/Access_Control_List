@@ -14,7 +14,7 @@ Writing comments to file1.txt as alice:
 Posted picture: file2.txt with alice as the owner and default permissions
 Writing comments to file2.txt as alice: 
 	Text from Alice in file2
-Changed the permissions for file2.txt to rw rw r-
+Changed the permissions for file2.txt to rw rw r- by alice
 Changed the list for file2.txt to students
 alice logged out
 viewing as tom
