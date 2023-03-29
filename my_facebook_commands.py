@@ -30,6 +30,12 @@ def make_user(name):
   new_user = my_facebook_support.User(name)
   global current_user
   current_user = new_user
+  
+def parse_perms(perm_string):
+  reg_ex = re.search("(^[r-])([w-]$)", perm_string)
+
+  read_perm = reg_ex.group(0)  #can only be 'r' or '-'
+  write_perm = reg_ex.group(1)  #can only be 'w' or '-'
 
 
 def friend_add(args):
