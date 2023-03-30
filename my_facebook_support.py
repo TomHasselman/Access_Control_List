@@ -42,16 +42,16 @@ class Picture:
 
 
 def make_blue():
-  sys.stdout.write("\u001b[34m")
+  sys.stdout.write(BLUE)
 
 
 def make_green():
-  sys.stdout.write("\u001b[32m")
+  sys.stdout.write(GREEN)
 
 
 def make_white():
-  sys.stdout.write("\u001b[37m")
+  sys.stdout.write(LIGHT_GRAY)
   
 def make_purple():
-  sys.stdout.write("\033[0;35m")
+  sys.stdout.write(PURPLE)
 

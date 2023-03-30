@@ -1,0 +1,31 @@
+friendadd root
+viewby root
+friendadd steveo
+friendadd rita
+listadd testers
+friendadd steveo
+logout
+viewby steve
+viewby steveo
+postpicture script
+writecomments script echo Hello World!
+chmod script -w rw --
+chmod script2 rw rw rw
+chlst script testers
+logout
+viewby root
+friendadd rita
+chlst script testers
+listadd testers
+friendlist rita testers
+friendlist steveo testers
+chown script3 rita
+logout
+viewby rita
+postpicture script
+writecomments script echo Hello World!
+readcomments script
+listadd developers
+friendadd stew
+logout
+end

@@ -1,5 +1,5 @@
 Added root as a friend
-viewing as root
+Viewing as root
 Added alice as a friend
 Added bob as a friend
 Created list: students
@@ -7,7 +7,7 @@ Added alice to the students list
 Added bob to the students list
 Added tom as a friend
 root logged out
-viewing as alice
+Viewing as alice
 Posted picture: file1.txt with alice as the owner and default permissions
 Writing comments to file1.txt as alice: 
 	Text from Alice in file1
@@ -15,29 +15,26 @@ Posted picture: file2.txt with alice as the owner and default permissions
 Writing comments to file2.txt as alice: 
 	Text from Alice in file2
 Changed the permissions for file2.txt to rw rw r- by alice
-Changed the list for file2.txt to students
+Changed the list for file2.txt to students by alice
 alice logged out
-viewing as tom
-Reading comments from file1.txt: 
-	Text from Alice in file1
+Viewing as tom
+tom does not have permission to read comments from file1.txt
 Reading comments from file2.txt: 
 	Text from Alice in file2
-Writing comments to file2.txt as tom: 
-	Text from Tom in file2
-viewing as bob
-bob logged out
-viewing as bob
+tom does not have permission to write comments to file2.txt
+Duplicate logins not allowed
+tom logged out
+Viewing as bob
 Writing comments to file2.txt as bob: 
 	Text from Bob in file2
 Reading comments from file2.txt: 
 	Text from Alice in file2
-	Text from Tom in file2
 	Text from Bob in file2
 bob logged out
-viewing as root
+Viewing as root
 Changed the owner for file1.txt to tom
 root logged out
-viewing as tom
+Viewing as tom
 Writing comments to file1.txt as tom: 
 	Text from Tom in file1
 Reading comments from file1.txt: 
