@@ -10,6 +10,11 @@ def check_file_exists():
     open("audit.txt", "w").close()  #clears out the txt file
   if (os.path.exists(cwd + "/friends.txt")):
     open("friends.txt", "w").close()
+  if (os.path.exists(cwd + "/lists.txt")):
+    open("lists.txt", "w").close()
+  if (os.path.exists(cwd + "/pictures.txt")):
+    open("pictures.txt", "w").close()
+  
 
 
 check_file_exists()

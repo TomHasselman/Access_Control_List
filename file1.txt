@@ -1,3 +1,0 @@
-file1.txt
-Text from Alice in file1
-Text from Tom in file1

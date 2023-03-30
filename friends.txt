@@ -1,4 +1,3 @@
 root
-alice
-bob
-tom
+steveo
+rita

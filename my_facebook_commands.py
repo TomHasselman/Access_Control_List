@@ -289,7 +289,7 @@ def read_comments(args):
       picture_file = open(file_name, "r")
       next(picture_file)
       next_line = picture_file.readline().rstrip('\n')
-      string = f"Reading comments from {file_name}: "
+      string = f"Reading comments from {file_name} as {current_user}: "
       print(string)
       log_audit(string)
 
@@ -353,6 +353,20 @@ def write_comments(args):
     print(string)
     log_audit(string)
 
+def log_lists():
+  list_file = open("lists.txt", "a")
+  pictures_file = open("pictures.txt", "a")
+  picture_name_list = []
+
+  for list in list_of_friend_lists:
+    list_file.write(f"{list[0]}: ")
+    list_file.write(', '.join(list[1:]))
+    #list_file.write("\n")
+  
+  for picture in picture_list:
+    picture_name_list.append(picture.name)
+  pictures_file.write("Pictures: ")
+  pictures_file.write(', '.join(picture_name_list))
 
 # takes args but doesn't use them. This is a consequence of how the process_cmd() function works
 def end(args):
@@ -361,6 +375,7 @@ def end(args):
   print(string)
   log_audit(string)
   string = "Writing friends.txt, lists.txt, pictures.txt, and audit.txt..."
+  log_lists()
   print(string)
   log_audit(string)
 
